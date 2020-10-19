@@ -1,0 +1,62 @@
+<html>
+<header>
+    <title>VUE Lunch Order</title>
+    <meta charset="UTF8">
+    <link rel="stylesheet" href="style.css">
+</header>
+
+<body>
+
+    <script src="https://kit.fontawesome.com/1876593557.js" crossorigin="anonymous"></script>
+    <div id="app">
+
+        <h1>Order your meal</h1>
+        <p>{{message}}</p>
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Meal</td>
+                    <td>Option</td>
+                    <td>Price</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(order, index) in orders">
+                    <td><input v-model="order.name" type="text" placeholder="enter name"/></td>
+                    <td>
+                        <select v-model="order.meal">
+                            <option v-for="meal in meals" v-bind:value="meal.id">{{meal.name}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select v-model="order.option">
+                            <option v-for="opt in options" v-bind:value="opt.id">{{opt.name}}</option>
+                        </select>
+                    </td>
+                    <td>{{ priceOfMeal(order.meal, order.option) }}</td>
+                    <td>
+                        <i v-on:click="removeOrderLine(index)"  class="fas fa-minus-circle"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><i v-on:click="addOrderLine" class="fas fa-plus-circle"></i></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <div>Total amount:<span>{{totalAmount}}</span></div>
+
+
+    </div>
+
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="app.js"></script></html>
